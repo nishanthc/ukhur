@@ -16,6 +16,12 @@ class Report(models.Model):
 
 
 class Document(models.Model):
+    report = models.ForeignKey(Report, on_delete=models.CASCADE)
+
+    file_name = models.CharField(
+        max_length=300,
+    )
+
     text = models.TextField(
         blank=True,
         null=True

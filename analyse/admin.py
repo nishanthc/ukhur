@@ -8,6 +8,12 @@ from analyse.models import Report, Document
 class ReportAdmin(admin.ModelAdmin):
     pass
 
+
 @admin.register(Document)
 class ReportAdmin(admin.ModelAdmin):
-    fields = ('report', 'file_name', 'text', 'word_occurrences_count', 'word_occurrences_sentence')
+    fields = ('report',
+              'file_name',
+              'text',
+              'word_occurrences_count',
+              'word_occurrences_sentence'
+              )

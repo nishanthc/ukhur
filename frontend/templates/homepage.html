@@ -17,8 +17,8 @@
             parallelUploads: 20,
             addRemoveLinks: true,
 
-            success: function(file, response){
-                if (response["error"]){
+            success: function (file, response) {
+                if (response["error"]) {
                     alert(response["error"])
                     this.removeAllFiles();
                 } else {

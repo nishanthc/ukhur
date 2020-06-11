@@ -4,7 +4,7 @@ Django==3.0.7
 django-environ==0.4.5
 joblib==0.15.1
 nltk==3.5
-psycopg2==2.8.5
+psycopg2-binary
 pytz==2020.1
 regex==2020.6.8
 sqlparse==0.3.1

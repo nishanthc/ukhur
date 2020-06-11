@@ -18,7 +18,14 @@
             addRemoveLinks: true,
 
             success: function(file, response){
-                window.location.href = response;
+                if (response["error"]){
+                    alert(response["error"])
+                    this.removeAllFiles();
+                } else {
+                    window.location.href = response["url"];
+
+                }
+
             },
 
             init: function () {

@@ -63,13 +63,18 @@ class ReportWordView(TemplateView):
                     sentences[document.file_name] = document.word_occurrences_sentence[word]
                 except KeyError:
                     pass
-            context["sentences"] = sentences
+
         else:
 
             document_obj = Document.objects.get(id=document_id)
             context["page_document_id"] = int(self.request.GET.get('document', ''))
             context["page_file_name"] = document_obj.file_name
-            context["sentences"] = document_obj.word_occurrences_sentence
+            try:
+                pprint(document_obj.word_occurrences_sentence)
+                sentences[document_obj.file_name] = document_obj.word_occurrences_sentence[word]
+            except KeyError:
+                pass
+        context["sentences"] = sentences
         context["documents"] = create_list_of_documents(report)
         context["word"] = word
 

@@ -52,7 +52,7 @@
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ sentence }}</td>
-                    <td>{% if page_file_name %}{{ page_file_name }}{% else %}{{ file_name }}{% endif %}</td>
+                    <td>{{ file_name }}</td>
 
                 </tr>
             {% endfor %}

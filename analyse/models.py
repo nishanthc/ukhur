@@ -11,8 +11,12 @@ class Report(models.Model):
         default=uuid.uuid4,
         editable=False
     )
-    word_occurrences_count = JSONField()
+    word_occurrences_count = JSONField(
+        null=True
+    )
 
+    def __str__(self):
+        return str(self.pk)
 
 class Document(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
@@ -26,6 +30,13 @@ class Document(models.Model):
         null=True
     )
 
-    word_occurrences_count = JSONField()
+    word_occurrences_count = JSONField(
+        null=True
+    )
 
-    word_occurrences_sentence = JSONField()
+    word_occurrences_sentence = JSONField(
+        null=True
+    )
+
+    def __str__(self):
+        return self.file_name

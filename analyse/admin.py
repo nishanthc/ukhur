@@ -10,4 +10,4 @@ class ReportAdmin(admin.ModelAdmin):
 
 @admin.register(Document)
 class ReportAdmin(admin.ModelAdmin):
-    fields = ('report', 'file_name',)
+    fields = ('report', 'file_name', 'text', 'word_occurrences_count', 'word_occurrences_sentence')

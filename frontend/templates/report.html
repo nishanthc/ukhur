@@ -1,12 +1,17 @@
 {% extends 'base/base.html' %}
 {% block content %}
     <div class="document_nav">
-        <a href="/report/{{ report_id }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">All
+        <a href="/report/{{ report_id }}" class="btn btn-primary btn-lg {% if not page_document_id %}active{% endif %}"
+           role="button" aria-pressed="true">All
             Documents</a>
         {% for document in documents %}
             {% for file_name,document_id in document.items %}
-                <a href="/report/{{ report_id }}/document/{{ document_id }}" class="btn btn-primary btn-lg"
+                <a href="/report/{{ report_id }}/document/{{ document_id }}"
+                   class="btn btn-primary btn-lg {% if document_id == page_document_id %}
+                active
+                {% endif %}"
                    role="button" aria-pressed="true">{{ file_name }}</a>
+
             {% endfor %}
 
 

@@ -76,7 +76,7 @@ class DocumentWordView(TemplateView):
 
         report = Report.objects.get(uuid=report_id)
         context["documents"] = create_list_of_documents(report)
-        context["document_id"] = document_id
+        context["page_document_id"] = document_id
         document_obj = Document.objects.get(id=document_id)
         total_word_occurrences = OrderedDict(
             sorted(document_obj.word_occurrences_count.items(), key=itemgetter(1), reverse=True))

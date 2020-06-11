@@ -18,6 +18,7 @@ class Report(models.Model):
     def __str__(self):
         return str(self.pk)
 
+
 class Document(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
 

@@ -1,35 +1,48 @@
 {% extends 'base/base.html' %}
 {% block content %}
+    <div class="document_nav">
+        <a href="/report/{{ report_id }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">All
+            Documents</a>
+        {% for document in documents %}
+            {% for file_name,document_id in document.items %}
+                <a href="/report/{{ report_id }}/document/{{ document_id }}" class="btn btn-primary btn-lg"
+                   role="button" aria-pressed="true">{{ file_name }}</a>
+            {% endfor %}
 
-    {{ report_id }}
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+
+        {% endfor %}
+    </div>
+
+    <table id="word_occurrences" class="display">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Word</th>
+            <th scope="col">Occurrence Count</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for word,count in total_word_occurrences.items %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ word }}</td>
+                <td>{{ count }}</td>
+                <td><a href="/report/{{ report_id }}/{{ word }}">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-search"></span> Show Sentences
+                    </button>
+                </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <script>$(document).ready(function () {
+        $('#word_occurrences').DataTable({
+            "pageLength": 20
+        });
+    });</script>
+
+
 {% endblock %}

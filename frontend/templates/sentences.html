@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="document_nav">
+        <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">All Documents</a>
+        {% for document in documents %}
+            <a href="#" class="btn btn-primary btn-lg" role="button" aria-pressed="true">{{ document }}</a>
+        {% endfor %}
+    </div>
+    <div style="text-align: center;">
+        <h3>All sentences containing "{{ word }}" in all documents</h3>
+    </div>
+    <table id="sentences" class="display">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Sentence</th>
+            <th scope="col">File</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for file_name,sentences in sentences.items %}
+            {% for sentence in sentences %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ sentence }}</td>
+                    <td>{{ file_name }}</td>
+
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <script>$(document).ready(function () {
+        $('#sentences').DataTable({
+            "pageLength": 20
+        });
+    });</script>
+
+
+{% endblock %}

@@ -2,13 +2,24 @@ from pprint import pprint
 
 from django.http import HttpResponse
 from django.views import View
+from pathlib import Path
+
+from analyse.helper import process_documents
 
 
 class FileUpload(View):
     def post(self, request):
-        files = request.FILES
-        pprint(files)
-        for file_name,file in files.items():
-            pprint(file._name)
-            print(file.read().decode('utf-8'))
+        if request.FILES:
+            files = request.FILES
+        else:
+            return HttpResponse(status=402)
+
+        for file_name, file in files.items():
+            if Path(file._name).suffix == '.txt':
+                pass
+            else:
+                return HttpResponse(status=402)
+
+        process_documents(files)
+
         return HttpResponse('result')

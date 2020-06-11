@@ -15,8 +15,9 @@ def read_file(file_location):
 def create_document_dictionary(files):
     """ Takes a list of files and returns a dictionary containing their names and file contents """
     document_dictionary = {}
-    for file in files:
-        document_dictionary[read_file(file)[0]] = read_file(file)[1]
+    for file_name, file in files.items():
+        document_dictionary[file._name] = file.read().decode('utf-8')
+    pprint(document_dictionary)
     return document_dictionary
 
 

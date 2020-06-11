@@ -17,6 +17,10 @@
             parallelUploads: 20,
             addRemoveLinks: true,
 
+            success: function(file, response){
+                alert(response);
+            },
+
             init: function () {
                 var submitButton = document.querySelector("#submit-all")
                 myDropzone = this; // closure

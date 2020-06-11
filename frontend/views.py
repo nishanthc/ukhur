@@ -59,17 +59,12 @@ class ReportWordView(TemplateView):
 
         report = Report.objects.get(uuid=report_id)
         sentences = {}
-        documents = []
         for document in report.document_set.all():
             try:
                 sentences[document.file_name] = document.word_occurrences_sentence[word]
             except KeyError:
                 pass
-                documents.append(
-                    {
-                        document.file_name: document.id
-                    }
-                )
+        documents = create_list_of_documents(report)
 
         context["documents"] = documents
         context["sentences"] = sentences
@@ -88,15 +83,9 @@ class DocumentWordView(TemplateView):
         context["report_id"] = report_id
 
         report = Report.objects.get(uuid=report_id)
-        documents = []
-        for document in report.document_set.all():
-            documents.append(
-                {
-                    document.file_name: document.id
-                 }
-            )
+        documents = create_list_of_documents(report)
         context["documents"] = documents
-
+        context["document_id"] = document_id
         document_obj = Document.objects.get(id=document_id)
         total_word_occurrences = OrderedDict(
             sorted(document_obj.word_occurrences_count.items(), key=itemgetter(1), reverse=True))
@@ -104,3 +93,14 @@ class DocumentWordView(TemplateView):
         for x, z in total_word_occurrences.items():
             print(x, z)
         return context
+
+
+def create_list_of_documents(report):
+    documents = []
+    for document in report.document_set.all():
+        documents.append(
+            {
+                document.file_name: document.id
+            }
+        )
+    return documents

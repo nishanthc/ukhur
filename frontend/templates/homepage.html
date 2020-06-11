@@ -1,48 +1,4 @@
 {% extends 'base/base.html' %}
 {% block content %}
 
-    <form action="api/file-upload"
-          class="dropzone"
-          id="document-dropzone">
-        {% csrf_token %}
-    </form>
-    <button id="submit-all">Submit all files</button>
-
-    <script>
-        Dropzone.options.documentDropzone = {
-            autoProcessQueue: false,
-            uploadMultiple: true,
-            acceptedFiles: '.txt',
-            paramName: "document",
-            parallelUploads: 20,
-            addRemoveLinks: true,
-
-            success: function (file, response) {
-                if (response["error"]) {
-                    alert(response["error"])
-                    this.removeAllFiles();
-                } else {
-                    window.location.href = response["url"];
-
-                }
-
-            },
-
-            init: function () {
-                var submitButton = document.querySelector("#submit-all")
-                myDropzone = this; // closure
-
-                submitButton.addEventListener("click", function () {
-                    myDropzone.processQueue(); // Tell Dropzone to process all queued files.
-                });
-
-
-                this.on("addedfile", function () {
-                    // Show submit button here and/or inform user to click it.
-                });
-
-            }
-        };
-
-    </script>
 {% endblock %}

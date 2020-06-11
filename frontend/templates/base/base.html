@@ -3,9 +3,8 @@
 {% include 'base/head.html' %}
 <body>
 {% include 'base/navigation.html' %}
-
-
 <div class="container" style="margin-top:30px">
+    {% include "form/dropzone.html" %}
     {% block content %}{% endblock %}
 </div>
 

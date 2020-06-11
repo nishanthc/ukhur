@@ -1,13 +1,42 @@
 {% extends 'base/base.html' %}
 {% block content %}
     <div class="document_nav">
-        <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">All Documents</a>
+        <h3>Word occurrences by document:</h3>
+        <a href="/report/{{ report_id }}" class="btn btn-primary btn-lg"
+           role="button" aria-pressed="true">All
+            Documents</a>
         {% for document in documents %}
-            <a href="#" class="btn btn-primary btn-lg" role="button" aria-pressed="true">{{ document }}</a>
+            {% for file_name,document_id in document.items %}
+                <a href="/report/{{ report_id }}/?document={{ document_id }}"
+                   class="btn btn-primary btn-lg"
+                   role="button" aria-pressed="true">{{ file_name }}</a>
+
+            {% endfor %}
+
+
+        {% endfor %}
+    </div>
+
+      <div class="document_nav">
+        <h3>Sentences by document:</h3>
+        <a href="/report/{{ report_id }}/{{ word }}" class="btn btn-primary btn-lg {% if not page_document_id %}active{% endif %}"
+           role="button" aria-pressed="true">All
+            Documents</a>
+        {% for document in documents %}
+            {% for file_name,document_id in document.items %}
+                <a href="/report/{{ report_id }}/{{ word }}/?document={{ document_id }}"
+                   class="btn btn-primary btn-lg {% if document_id == page_document_id %}
+                active
+                {% endif %}"
+                   role="button" aria-pressed="true">{{ file_name }}</a>
+
+            {% endfor %}
+
+
         {% endfor %}
     </div>
     <div style="text-align: center;">
-        <h3>All sentences containing "{{ word }}" in all documents</h3>
+        <h3>All sentences containing "{{ word }}" in {% if not page_file_name %}all documents{% else %}{{ page_file_name }}{% endif %}</h3>
     </div>
     <table id="sentences" class="display">
         <thead>
@@ -23,7 +52,7 @@
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ sentence }}</td>
-                    <td>{{ file_name }}</td>
+                    <td>{% if page_file_name %}{{ page_file_name }}{% else %}{{ file_name }}{% endif %}</td>
 
                 </tr>
             {% endfor %}

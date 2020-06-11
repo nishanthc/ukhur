@@ -26,18 +26,22 @@ class ReportView(TemplateView):
 
     def get_context_data(self, report_id, *args, **kwargs):
         context = super(ReportView, self).get_context_data(*args, **kwargs)
-
+        document_id = self.request.GET.get('document', '')
         context['website_name'] = "Ukhur"
         context["report_id"] = report_id
-
         report = Report.objects.get(uuid=report_id)
         context["documents"] = create_list_of_documents(report)
+        if not document_id:
+            total_word_occurrences = OrderedDict(
+                sorted(report.word_occurrences_count.items(), key=itemgetter(1), reverse=True))
+            context["total_word_occurrences"] = total_word_occurrences
+        else:
+            context["page_document_id"] = int(self.request.GET.get('document', ''))
+            document_obj = Document.objects.get(id=document_id)
+            total_word_occurrences = OrderedDict(
+                sorted(document_obj.word_occurrences_count.items(), key=itemgetter(1), reverse=True))
+            context["total_word_occurrences"] = total_word_occurrences
 
-        total_word_occurrences = OrderedDict(
-            sorted(report.word_occurrences_count.items(), key=itemgetter(1), reverse=True))
-        context["total_word_occurrences"] = total_word_occurrences
-        for x, z in total_word_occurrences.items():
-            print(x, z)
         return context
 
 
@@ -46,44 +50,32 @@ class ReportWordView(TemplateView):
 
     def get_context_data(self, report_id, word, *args, **kwargs):
         context = super(ReportWordView, self).get_context_data(*args, **kwargs)
+        document_id = self.request.GET.get('document', '')
 
         context['website_name'] = "Ukhur"
         context["report_id"] = report_id
 
         report = Report.objects.get(uuid=report_id)
         sentences = {}
-        for document in report.document_set.all():
-            try:
-                sentences[document.file_name] = document.word_occurrences_sentence[word]
-            except KeyError:
-                pass
+        if not document_id:
+            for document in report.document_set.all():
+                try:
+                    sentences[document.file_name] = document.word_occurrences_sentence[word]
+                except KeyError:
+                    pass
+            context["sentences"] = sentences
+        else:
 
+            document_obj = Document.objects.get(id=document_id)
+            context["page_document_id"] = int(self.request.GET.get('document', ''))
+            context["page_file_name"] = document_obj.file_name
+            context["sentences"] = document_obj.word_occurrences_sentence
         context["documents"] = create_list_of_documents(report)
-        context["sentences"] = sentences
         context["word"] = word
 
         return context
 
 
-class DocumentWordView(TemplateView):
-    template_name = "report.html"
-
-    def get_context_data(self, report_id, document_id, *args, **kwargs):
-        context = super(DocumentWordView, self).get_context_data(*args, **kwargs)
-
-        context['website_name'] = "Ukhur"
-        context["report_id"] = report_id
-
-        report = Report.objects.get(uuid=report_id)
-        context["documents"] = create_list_of_documents(report)
-        context["page_document_id"] = document_id
-        document_obj = Document.objects.get(id=document_id)
-        total_word_occurrences = OrderedDict(
-            sorted(document_obj.word_occurrences_count.items(), key=itemgetter(1), reverse=True))
-        context["total_word_occurrences"] = total_word_occurrences
-        for x, z in total_word_occurrences.items():
-            print(x, z)
-        return context
 
 
 def create_list_of_documents(report):

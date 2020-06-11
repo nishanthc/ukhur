@@ -1,13 +1,14 @@
 {% extends 'base/base.html' %}
 {% block content %}
 
-    <form action="api/file-upload"
+    <form action="/api/file-upload"
           class="dropzone"
           id="document-dropzone">
         {% csrf_token %}
     </form>
     <button id="submit-all">Submit all files</button>
 
+    {{ report_id }}
     <script>
         Dropzone.options.documentDropzone = {
             autoProcessQueue: false,
@@ -18,7 +19,7 @@
             addRemoveLinks: true,
 
             success: function(file, response){
-                window.location.href = response;
+                alert(response);
             },
 
             init: function () {

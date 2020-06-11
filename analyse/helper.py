@@ -73,6 +73,7 @@ def process_documents(files):
     analyse_word_occurrences(report)
     calculate_total_word_occurrences(report)
     # pprint(document_reports)
+    return str(report.uuid)
 
 
 def get_context(document_text, extracted_words):

@@ -1,6 +1,7 @@
 from pprint import pprint
 
 from django.http import HttpResponse
+from django.urls import reverse
 from django.views import View
 from pathlib import Path
 
@@ -19,7 +20,7 @@ class FileUpload(View):
                 pass
             else:
                 return HttpResponse(status=402)
+        uuid = process_documents(files)
+        url = reverse('report', urlconf=None, args=(uuid,), kwargs=None)
 
-        process_documents(files)
-
-        return HttpResponse('result')
+        return HttpResponse(url)

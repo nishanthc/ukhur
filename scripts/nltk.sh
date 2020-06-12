@@ -1,1 +1,1 @@
-python nltk_download.py
+sudo python scripts/nltk_download.py

@@ -1,10 +1,11 @@
+-i https://pypi.org/simple
 asgiref==3.2.7
 click==7.1.2
-Django==3.0.7
 django-environ==0.4.5
+django==3.0.7
 joblib==0.15.1
 nltk==3.5
-psycopg2-binary
+psycopg2-binary==2.8.5
 pytz==2020.1
 regex==2020.6.8
 sqlparse==0.3.1

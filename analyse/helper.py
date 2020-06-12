@@ -1,6 +1,7 @@
 from collections import Counter
 from pprint import pprint
 
+import chardet
 import nltk
 
 from nltk.corpus import stopwords
@@ -17,7 +18,14 @@ def read_file(file_location):
 def create_documents(files, report):
     """ Takes a list of files and returns a dictionary containing their names and file contents """
     for file_name, file in files.items():
-        text = file.read().decode('utf-8')
+        text = file.read()
+        try:
+            text = text.decode('utf-8')
+        except UnicodeDecodeError:
+            text = text.decode('latin-1')
+
+
+
         document = Document()
         document.report = report
         document.file_name = file._name

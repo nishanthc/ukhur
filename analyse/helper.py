@@ -1,30 +1,17 @@
 from collections import Counter
-from pprint import pprint
-
-import chardet
 import nltk
-
 from nltk.corpus import stopwords
-
 from analyse.models import Report, Document
 
 
-def read_file(file_location):
-    """ Takes a file location and returns the file name and it's contents. """
-    f = open(file_location, "r")
-    return f.name, f.read()
-
-
 def create_documents(files, report):
-    """ Takes a list of files and returns a dictionary containing their names and file contents """
+    """ Takes a dictionary of files and a report object and creates document objects """
     for file_name, file in files.items():
         text = file.read()
         try:
             text = text.decode('utf-8')
         except UnicodeDecodeError:
             text = text.decode('latin-1')
-
-
 
         document = Document()
         document.report = report
@@ -35,8 +22,7 @@ def create_documents(files, report):
 
 
 def analyse_word_occurrences(report):
-    """ Takes a dictionary containing file names and file content and returns a list containing a dictionary
-        containing document_name, document_text, extracted_words and word_occurrences for each document.
+    """ Takes a report object and analyses each document associated with the report.
     """
     # >>> import nltk
     # >>> nltk.download('stopwords')
@@ -64,7 +50,7 @@ def calculate_word_occurrences(extracted_words):
 
 
 def calculate_total_word_occurrences(report):
-    """ Takes a list containing multiple word occurrence count dictionaries and combines them to create a total."""
+    """ Takes a report object and returns the combined word occurrence counts"""
     total_word_occurrences = Counter()
     for document in report.document_set.all():
         total_word_occurrences = total_word_occurrences + Counter(document.word_occurrences_count)
@@ -74,7 +60,7 @@ def calculate_total_word_occurrences(report):
 
 
 def process_documents(files):
-    """ Takes a list of files and processes them all """
+    """ Takes a dictionary of files and generates a full report """
     report = Report()
     report.save()
     create_documents(files, report)
@@ -85,8 +71,8 @@ def process_documents(files):
 
 
 def get_context(document_text, extracted_words):
-    """ Takes document text and a list of extracted words and returns a dictionary containing a list of sentences
-        containing each word.
+    """ Takes a documents text content and a list of extracted words, returns a dictionary containing a list of sentences
+        for each word.
     """
     extracted_words = list(set(extracted_words))
     sentences = nltk.sent_tokenize(document_text)

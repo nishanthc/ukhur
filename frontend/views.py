@@ -52,7 +52,7 @@ class ReportWordView(TemplateView):
         context = super(ReportWordView, self).get_context_data(*args, **kwargs)
         document_id = self.request.GET.get('document', '')
 
-        context['website_name'] = "Ukhur1"
+        context['website_name'] = "Ukhur"
         context["report_id"] = report_id
 
         report = Report.objects.get(uuid=report_id)

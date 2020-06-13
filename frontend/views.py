@@ -1,10 +1,6 @@
 from collections import OrderedDict
 from operator import itemgetter
-from pprint import pprint
-
-from django.shortcuts import render
-
-# Create your views here.
+from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
 from analyse.models import Report, Document
@@ -15,9 +11,7 @@ class HomeView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
-
         context['website_name'] = "Ukhur"
-
         return context
 
 
@@ -55,7 +49,7 @@ class ReportWordView(TemplateView):
         context['website_name'] = "Ukhur"
         context["report_id"] = report_id
 
-        report = Report.objects.get(uuid=report_id)
+        report = get_object_or_404(Report, uuid=report_id)
         sentences = {}
         if not document_id:
             for document in report.document_set.all():
@@ -65,22 +59,17 @@ class ReportWordView(TemplateView):
                     pass
 
         else:
-
-            document_obj = Document.objects.get(id=document_id)
+            document_obj = get_object_or_404(Document, id=document_id)
             context["page_document_id"] = int(self.request.GET.get('document', ''))
             context["page_file_name"] = document_obj.file_name
             try:
-                pprint(document_obj.word_occurrences_sentence)
                 sentences[document_obj.file_name] = document_obj.word_occurrences_sentence[word]
             except KeyError:
                 pass
         context["sentences"] = sentences
         context["documents"] = create_list_of_documents(report)
         context["word"] = word
-
         return context
-
-
 
 
 def create_list_of_documents(report):

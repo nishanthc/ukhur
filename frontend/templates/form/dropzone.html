@@ -4,7 +4,11 @@
       id="document-dropzone">
     {% csrf_token %}
 </form>
-<button id="submit-all">Anaylse</button>
+<div class="analyse_button text-center">
+    <button type="button" id="submit-all" class="btn btn-primary btn-lg ">Submit</button>
+
+</div>
+
 
 <script>
     Dropzone.options.documentDropzone = {

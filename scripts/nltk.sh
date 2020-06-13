@@ -1,4 +1,3 @@
-#source /opt/python/run/venv/bin/activate
-#export NLTK_DATA="/home/ec2-user/nltk_data/"
-#pip3 install nltk
-#python scripts/nltk_download.py
+source /opt/python/run/venv/bin/activate
+pip3 install nltk
+sudo /opt/python/run/venv/bin/python -m nltk.downloader -d /usr/local/share/nltk_data all

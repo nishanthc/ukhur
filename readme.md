@@ -48,6 +48,16 @@ command is executed to install all required python packages:
 pip install -r requirements.txt
 ```
 
+#### Installing NLTK Data (local only)
+
+For any local installations it is required that NLTK data is downloaded manually. This can be doing by running executing the following commands within your python environment:
+
+```
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+```
+
 ### Configuration
 
 This application uses environment variables to keep variables outside of the code base in order to improve security.

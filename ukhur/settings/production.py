@@ -1,7 +1,7 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS = ['ukhur.nish.io']
+ALLOWED_HOSTS = ['nish.io']
 
 DATABASES = {
     'default': {

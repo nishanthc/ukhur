@@ -8,7 +8,7 @@ Ukhur is a Django application that allows you to analyse multiple .txt files. Th
  number of occurrences of words in one or many .txt files. The application allows you to identify which sentences
  each unique word appears in.
  
- Once a report is generated it is persistant, it can be shared with other people to view.
+ Once a report is generated it is peristent, it can be shared with other people to view.
  
  ![](https://i.imgur.com/Y7nNBTL.png)
  
@@ -19,7 +19,7 @@ A hosted instance of Ukhur can be accessed [here](http://ukhur.nish.io).
 
 Remember to try and upload multiple files at the same time!
  
- If you'd like to see a pre-generated report on a EULA from Microsoft you can view it [here](https://ukhur.nish.io/report/f199d881-5a5e-47be-9c47-ba84f54766ad/).
+ If you'd like to see a pre-generated report on some sample files you can view it [here](https://ukhur.nish.io/report/fa0fd355-f3d0-4856-9118-8b684be6e491/).
  
  
 ## Getting Started

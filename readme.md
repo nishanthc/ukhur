@@ -10,6 +10,8 @@ Ukhur is a Django application that allows you to analyse multiple .txt files. Th
  
  Once a report is generated it is persistant, it can be shared with other people to view.
  
+ ![](https://i.imgur.com/Y7nNBTL.png)
+ 
 # Demo Site [![Website ukhur.nish.io](https://img.shields.io/website-up-down-green-red/http/ukhur.nish.io.svg)](http://ukhur.nish.io/)
 
 

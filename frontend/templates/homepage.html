@@ -1,10 +1,4 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    {% for select, options in nested_dictionary.items %}
-        <select name="{{ select }}" id="{{ select }}">
-            {% for text,value in options.items %}
-                <option value="{{ value }}">{{ text }}</option>
-            {% endfor %}
-        </select>
-    {% endfor %}
+
 {% endblock %}

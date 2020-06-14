@@ -74,6 +74,13 @@ If you are attempting to run this application locally you will have to manually 
 python manage.py migrate --settings=ukhur.settings.local
 ```
 
+### Running Ukhur Locally
+
+In order to run Ukhur locally you can use the following command:
+```
+python manage.py runserver --settings=ukhur.settings.local
+```
+
 ## Built With
 
 * [NLTK](http://www.dropwizard.io/1.0.2/docs/) - Natural Language Toolkit

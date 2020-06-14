@@ -108,7 +108,7 @@ You should then be able to access the website from `http://0.0.0.0:8000/`
 * [NLTK](http://www.dropwizard.io/1.0.2/docs/) - NLTK is a leading platform for building Python programs to work with human language data.
 * [Dropzone.js](http://www.dropwizard.io/1.0.2/docs/) - DropzoneJS is an open source library that provides
  drag’n’drop file uploads 
- * [DataTables](http://www.dropwizard.io/1.0.2/docs/) - DataTables is a table enhancing plug-in for the jQuery Javascript library, adding sorting, paging and filtering abilities to plain HTML tables with minimal effort.
+ * [DataTables](https://datatables.net/) - DataTables is a table enhancing plug-in for the jQuery Javascript library, adding sorting, paging and filtering abilities to plain HTML tables with minimal effort.
 ## Authors
 
 * **Nishanth Chandradas** - - [Linkedin](https://www.linkedin.com/in/nishanthchandradas/)

@@ -24,10 +24,10 @@ Remember to try and upload multiple files at the same time!
 
 There are three ways this application has been designed to be operate.
 
-* Vanilla Local - (Development)
+* [Vanilla Local](#Local) - (Development)
     * This requires you to follow the prerequisites and configuration guide.
     
-* Docker - (Local + Production) 
+* [Docker](#Docker) - (Local + Production) 
     * This does not require any prerequisites/configuration apart from Docker being installed on your system.
 
 * AWS Elasticbeanstalk - (Production)
@@ -92,7 +92,7 @@ In order to run Ukhur locally you can use the following command:
 python manage.py runserver --settings=ukhur.settings.local
 ```
 
-## Docker
+## Docker 
 
 In order to run this application with docker you just need to run the following commands from the application root:
 

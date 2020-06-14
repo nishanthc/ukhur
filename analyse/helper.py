@@ -8,6 +8,7 @@ def create_documents(files, report):
     """ Takes a dictionary of files and a report object and creates document objects """
     for file_name, file in files.items():
         text = file.read()
+        # Handle different file encodings
         try:
             text = text.decode('utf-8')
         except UnicodeDecodeError:
@@ -24,14 +25,9 @@ def create_documents(files, report):
 def analyse_word_occurrences(report):
     """ Takes a report object and analyses each document associated with the report.
     """
-    # >>> import nltk
-    # >>> nltk.download('stopwords')
-    # >>> nltk.download('punkt')
     stop_word_list = stopwords.words('english')
     stop_word_set = set(stop_word_list)
-    extracted_words_list_of_dicts = []
     for document in report.document_set.all():
-        #  to quickly test if a word is not a stop word, use a set:
         tokens = nltk.word_tokenize(document.text)
         extracted_words = []
         for word in tokens:
